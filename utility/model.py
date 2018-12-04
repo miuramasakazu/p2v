@@ -58,11 +58,11 @@ class Program2Vec:
     def train(self):
         pair_count = self.data.calculate_pair_count()
         batch_count = self.iteration * pair_count / self.batch_size
-        progress_bar = tqdm(range(int(batch_count)))
-
         device = f'cuda: {self.gpu}' if self.use_cuda else 'cpu'
         if self.use_cuda:
             print('CUDA available')
+            self.model.to(device)
+        progress_bar = tqdm(range(int(batch_count)))
 
         for i in progress_bar:
             pos_pairs = self.data.get_positive_pairs_batch()
