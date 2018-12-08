@@ -1,22 +1,21 @@
 import argparse
 from utility.model import Program2Vec
 
-
 def main():
     parser = argparse.ArgumentParser(description='Program2id')
     parser.add_argument('--input_file_path', '-i', default='zhihu.txt',
                         help='input file consists of programs splitted by space')
     parser.add_argument('--output_file_path', '-o', default='res.txt',
                         help='output file consists of word embeddings')
-    parser.add_argument('--emb_dim', '-ed', type=int, default=100,
+    parser.add_argument('--emb_dim', '-ed', type=int, default=30,
                         help='dimensions of program vector')
     parser.add_argument('--min_count', '-mc', type=int, default=5,
                         help='minimal number of programs to be filtered')
     parser.add_argument('--batch_size', '-b', type=int, default=50,
                         help='number of programs in each mini-batch')
-    parser.add_argument('--window_size', '-ws', type=int, default=2,
+    parser.add_argument('--window_size', '-ws', type=int, default=1,
                         help='context size for each center program')
-    parser.add_argument('--neg_number', '-nn', type=int, default=2,
+    parser.add_argument('--neg_number', '-nn', type=int, default=5,
                         help='negative samples number for each center program')
     parser.add_argument('--iteration', '-it', type=int, default=2,
                         help='iteration number for training')
