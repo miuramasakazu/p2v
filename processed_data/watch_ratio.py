@@ -1,7 +1,7 @@
 import pandas as pd
 from collections import defaultdict
 
-watch_program_df = pd.read_pickle("watch_program_df.pkl")
+watch_program_df = pd.read_csv("watch_program_df.csv")
 watch_group = watch_program_df.groupby(["世帯No", "番組コード"])
 watch_ratio = watch_group[["視聴分数"]].sum()
 
@@ -22,7 +22,7 @@ program_time = program_df.groupby(["番組コード"])["放送分数"].sum()
 watch_ratio = pd.merge(watch_ratio, program_time.to_frame(), left_index=True, right_index=True)
 watch_ratio["視聴割合"] = watch_ratio["視聴分数"] / watch_ratio["放送分数"]
 
-P = 0.01
+P = 0.3
 watch_dict = defaultdict(list)
 d = list(watch_ratio.query('視聴割合 > @P').index)
 for (sample, code) in d:
